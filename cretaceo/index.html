@@ -1,3 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#eef0e7">
+  <title>DINOSSIER — Tyrannosaurus rex</title>
+
+  <script type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js">
+  </script>
+
+  <style>
+    :root{
+      --verde:#29411d;
+      --verde2:#66833a;
+      --creme:#f7f5eb;
+      --vidro:rgba(250,248,239,.91);
+      --texto:#1b2417;
+      --sombra:0 18px 55px rgba(18,29,13,.24);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--texto)}
+    body{min-height:100svh;background:#dce5d4;overflow:hidden}
+
+    .app{
+      position:relative;
+      min-height:100svh;
+      max-width:620px;
+      margin:auto;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 25%,rgba(255,255,255,.88),transparent 38%),
+        linear-gradient(180deg,#f2f2e9 0%,#dce7d5 54%,#a3b594 100%);
+      isolation:isolate;
+    }
+
+    .app::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      opacity:.38;
+      background:
+        radial-gradient(ellipse at 10% 90%,#315025 0 13%,transparent 14%),
+        radial-gradient(ellipse at 91% 84%,#526f3d 0 15%,transparent 16%),
+        radial-gradient(ellipse at 55% 96%,#768b61 0 18%,transparent 19%);
+      filter:blur(24px);
+    }
+
+    header{
+      position:relative;
+      z-index:10;
+      padding:19px 16px 4px;
+      text-align:center;
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      margin:0 0 6px;
+      font-size:.72rem;
+      letter-spacing:.31em;
+      font-weight:900;
+      color:var(--verde2);
+    }
+
+    h1{
+      margin:0;
+      color:var(--verde);
+      font-size:clamp(2rem,8.7vw,3.65rem);
+      line-height:.95;
+      letter-spacing:.015em;
+    }
+
+    .scientific{
+      margin:9px 0 0;
+      font-style:italic;
+      color:#42543b;
+      font-size:1rem;
+    }
+
+    .stage{
+      position:absolute;
+      inset:112px 0 92px;
+      overflow:hidden;
+    }
+
+    .sketchfab-frame{
+      position:absolute;
+      left:-31%;
+      top:-16%;
+      width:162%;
+      height:132%;
+      border:0;
+      background:transparent;
+    }
+
+    .top-fade,.bottom-fade{
+      position:absolute;
+      z-index:3;
+      left:0;right:0;
+      pointer-events:none;
+    }
+
+    .top-fade{
+      top:0;height:23%;
+      background:linear-gradient(180deg,#eef0e7 8%,rgba(238,240,231,.78) 42%,transparent);
+    }
+
+    .bottom-fade{
+      bottom:0;height:28%;
+      background:linear-gradient(0deg,#a9b99a 3%,rgba(169,185,154,.7) 43%,transparent);
+    }
+
+    .loading{
+      position:absolute;
+      z-index:8;
+      inset:0;
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+      transition:opacity .6s ease;
+    }
+
+    .loading.hidden{opacity:0}
+
+    .loading-card{
+      padding:15px 20px;
       border-radius:18px;
       background:var(--vidro);
       box-shadow:var(--sombra);
@@ -116,19 +247,19 @@
 <body>
   <main class="app">
     <header>
-      <p class="eyebrow">DINOSSIER 002</p>
-      <h1>MAMUTE-LANOSO</h1>
-      <p class="scientific">Mammuthus primigenius</p>
+      <p class="eyebrow">DINOSSIER 001</p>
+      <h1>TIRANOSSAURO REX</h1>
+      <p class="scientific">Tyrannosaurus rex</p>
     </header>
 
     <section class="stage">
       <iframe
         id="dinoFrame"
         class="sketchfab-frame"
-        title="Mamute-lanoso 3D"
+        title="Tiranossauro Rex 3D animado"
         allow="autoplay; fullscreen; xr-spatial-tracking"
         allowfullscreen
-        src="https://sketchfab.com/models/3c71aa882ef84f4c8d9bd3ac35492f5a/embed?autostart=1&preload=1&animation_autoplay=1&ui_hint=0&ui_infos=0&ui_controls=0&ui_stop=0&ui_help=0&ui_settings=0&ui_inspector=0&ui_watermark=0&ui_watermark_link=0&camera=0">
+        src="https://sketchfab.com/models/38007d947ae74dea83988cb0b08ee053/embed?autostart=1&preload=1&animation_autoplay=1&ui_hint=0&ui_infos=0&ui_controls=0&ui_stop=0&ui_help=0&ui_settings=0&ui_inspector=0&ui_watermark=0&ui_watermark_link=0&camera=0">
       </iframe>
 
       <div class="top-fade"></div>
@@ -137,7 +268,7 @@
       <div class="loading" id="loading">
         <div class="loading-card">
           <div class="pulse"></div>
-          Despertando o gigante do gelo…
+          Despertando o espécime…
         </div>
       </div>
     </section>
@@ -165,7 +296,7 @@
   <!-- Modelo provisório exclusivo para testar RA no Android. -->
   <model-viewer
     id="arModel"
-    src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/Elephant/glTF-Binary/Elephant.glb"
+    src="https://raw.githubusercontent.com/code4fukui/vr-dinosaur-museum/main/dinosaur-trex.glb"
     ar
     ar-modes="webxr scene-viewer quick-look"
     camera-controls>
@@ -173,20 +304,21 @@
 
   <dialog id="infoDialog">
     <section class="sheet">
-      <h2>Mammuthus primigenius</h2>
-      <p class="sub">Um dos maiores mamíferos da Era do Gelo.</p>
+      <h2>Tyrannosaurus rex</h2>
+      <p class="sub">Um dos maiores predadores terrestres conhecidos.</p>
 
       <div class="facts">
-        <div class="fact"><strong>Período</strong>Quaternário — Pleistoceno</div>
-        <div class="fact"><strong>Época</strong>cerca de 400 mil a 4 mil anos atrás</div>
-        <div class="fact"><strong>Dieta</strong>Herbívoro</div>
-        <div class="fact"><strong>Comprimento</strong>Cerca de 6–8 m</div>
-        <div class="fact"><strong>Altura</strong>Cerca de 3–4 m</div>
-        <div class="fact"><strong>Massa</strong>Cerca de 6 toneladas</div>
+        <div class="fact"><strong>Período</strong>Cretáceo Superior</div>
+        <div class="fact"><strong>Época</strong>68–66 milhões de anos</div>
+        <div class="fact"><strong>Dieta</strong>Carnívoro</div>
+        <div class="fact"><strong>Comprimento</strong>Cerca de 12–13 m</div>
+        <div class="fact"><strong>Altura</strong>Aproximadamente 4 m</div>
+        <div class="fact"><strong>Massa</strong>Várias toneladas</div>
       </div>
 
       <p class="note">
-        O mamute viveu em ambientes frios do hemisfério norte e possuía uma grossa camada de pelos e gordura. O modo RA ainda usa um modelo provisório.
+        Nesta versão, o modelo principal já é animado. O modo RA ainda usa
+        temporariamente o modelo estático da primeira versão.
       </p>
 
       <button class="close" id="closeInfo">Fechar</button>
@@ -225,4 +357,4 @@
     document.querySelector('#closeInfo').addEventListener('click', () => dialog.close());
   </script>
 </body>
-</html
+</html>
