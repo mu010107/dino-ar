@@ -1,1 +1,361 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f3e4c7">
+  <title>DINOSSIER — Homo sapiens</title>
+
+  <script type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js">
+  </script>
+
+  <style>
+    :root{
+      --terra:#5a3421;
+      --ocre:#b87534;
+      --areia:#f3e4c7;
+      --vidro:rgba(255,248,232,.92);
+      --texto:#2a1d15;
+      --sombra:0 18px 55px rgba(65,38,20,.27);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--texto)}
+    body{min-height:100svh;background:#dfb878;overflow:hidden}
+
+    .app{
+      position:relative;
+      min-height:100svh;
+      max-width:620px;
+      margin:auto;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 22%,rgba(255,250,230,.92),transparent 37%),
+        linear-gradient(180deg,#f5e8cf 0%,#e1b879 55%,#8b5432 100%);
+      isolation:isolate;
+    }
+
+    .app::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      opacity:.40;
+      background:
+        radial-gradient(ellipse at 8% 91%,#57351f 0 13%,transparent 14%),
+        radial-gradient(ellipse at 92% 85%,#764529 0 16%,transparent 17%),
+        radial-gradient(ellipse at 53% 97%,#a96c38 0 19%,transparent 20%);
+      filter:blur(25px);
+    }
+
+    header{
+      position:relative;
+      z-index:10;
+      padding:19px 16px 4px;
+      text-align:center;
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      margin:0 0 6px;
+      font-size:.72rem;
+      letter-spacing:.31em;
+      font-weight:900;
+      color:var(--ocre);
+    }
+
+    h1{
+      margin:0;
+      color:var(--terra);
+      font-size:clamp(2rem,8.7vw,3.65rem);
+      line-height:.95;
+      letter-spacing:.015em;
+    }
+
+    .scientific{
+      margin:9px 0 0;
+      font-style:italic;
+      color:#684a34;
+      font-size:1rem;
+    }
+
+    .stage{
+      position:absolute;
+      inset:112px 0 92px;
+      overflow:hidden;
+    }
+
+    .sketchfab-frame{
+      position:absolute;
+      left:-31%;
+      top:-16%;
+      width:162%;
+      height:132%;
+      border:0;
+      background:transparent;
+    }
+
+    .top-fade,.bottom-fade{
+      position:absolute;
+      z-index:3;
+      left:0;right:0;
+      pointer-events:none;
+    }
+
+    .top-fade{
+      top:0;height:23%;
+      background:linear-gradient(180deg,#f3e4c7 8%,rgba(243,228,199,.78) 42%,transparent);
+    }
+
+    .bottom-fade{
+      bottom:0;height:28%;
+      background:linear-gradient(0deg,#9a623d 3%,rgba(177,116,67,.72) 43%,transparent);
+    }
+
+    .loading{
+      position:absolute;
+      z-index:8;
+      inset:0;
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+      transition:opacity .6s ease;
+    }
+
+    .loading.hidden{opacity:0}
+
+    .loading-card{
+      padding:15px 20px;
+      border-radius:18px;
+      background:var(--vidro);
+      box-shadow:var(--sombra);
+      backdrop-filter:blur(14px);
+      text-align:center;
+      font-weight:800;
+      color:var(--terra);
+    }
+
+    .pulse{
+      width:40px;height:40px;margin:0 auto 11px;border-radius:50%;
+      border:4px solid rgba(90,52,33,.17);
+      border-top-color:var(--terra);
+      animation:girar .8s linear infinite;
+    }
+
+    @keyframes girar{to{transform:rotate(360deg)}}
+
+    .status{
+      position:absolute;
+      z-index:6;
+      left:50%;
+      bottom:101px;
+      transform:translateX(-50%);
+      padding:8px 13px;
+      border-radius:999px;
+      color:white;
+      background:rgba(55,31,18,.72);
+      backdrop-filter:blur(9px);
+      font-size:.75rem;
+      white-space:nowrap;
+      pointer-events:none;
+    }
+
+    .actions{
+      position:absolute;
+      z-index:20;
+      left:14px;right:14px;bottom:max(13px,env(safe-area-inset-bottom));
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      padding:11px;
+      border-radius:25px;
+      background:var(--vidro);
+      box-shadow:var(--sombra);
+      backdrop-filter:blur(18px);
+    }
+
+    button{
+      min-height:64px;
+      border:0;
+      border-radius:18px;
+      padding:8px 5px;
+      background:rgba(255,255,255,.62);
+      color:var(--terra);
+      font-weight:900;
+      font-size:.75rem;
+      cursor:pointer;
+    }
+
+    button .icon{display:block;font-size:1.42rem;margin-bottom:4px}
+
+    button.primary{
+      color:white;
+      background:linear-gradient(145deg,var(--ocre),var(--terra));
+    }
+
+    dialog{
+      width:min(92vw,520px);
+      border:0;
+      border-radius:26px;
+      padding:0;
+      color:var(--texto);
+      background:#fff7e7;
+      box-shadow:0 28px 80px rgba(0,0,0,.35);
+    }
+
+    dialog::backdrop{background:rgba(33,18,10,.62);backdrop-filter:blur(5px)}
+
+    .sheet{padding:24px}
+    .sheet h2{margin:0 0 5px;color:var(--terra);font-size:1.6rem}
+    .sheet .sub{margin:0 0 20px;color:#795d48;font-style:italic}
+
+    .facts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .fact{padding:14px;border-radius:16px;background:#f0e2c8}
+    .fact strong{
+      display:block;margin-bottom:4px;color:var(--terra);
+      font-size:.73rem;text-transform:uppercase;letter-spacing:.06em
+    }
+
+    .note{
+      margin:15px 0 0;
+      padding:12px;
+      border-radius:14px;
+      background:#ead2ad;
+      color:#513620;
+      font-size:.86rem;
+      line-height:1.4;
+    }
+
+    .close{width:100%;margin-top:18px;color:white;background:var(--terra)}
+
+    #arModel{
+      position:fixed;
+      width:1px;height:1px;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    @media(min-width:700px){
+      .app{box-shadow:0 0 70px rgba(0,0,0,.18)}
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <header>
+      <p class="eyebrow">DINOSSIER 003</p>
+      <h1>HOMO SAPIENS</h1>
+      <p class="scientific">Homo sapiens</p>
+    </header>
+
+    <section class="stage">
+      <iframe
+        id="dinoFrame"
+        class="sketchfab-frame"
+        title="Homo sapiens pré-histórico 3D"
+        allow="autoplay; fullscreen; xr-spatial-tracking"
+        allowfullscreen
+        src="https://sketchfab.com/models/409301c8f6864042866c54de20e5c860/embed?autostart=1&preload=1&animation_autoplay=1&ui_hint=0&ui_infos=0&ui_controls=0&ui_stop=0&ui_help=0&ui_settings=0&ui_inspector=0&ui_watermark=0&ui_watermark_link=0&camera=0">
+      </iframe>
+
+      <div class="top-fade"></div>
+      <div class="bottom-fade"></div>
+
+      <div class="loading" id="loading">
+        <div class="loading-card">
+          <div class="pulse"></div>
+          Reconstruindo nossos ancestrais…
+        </div>
+      </div>
+    </section>
+
+    <div class="status">Modelo animado • arraste para explorar</div>
+
+    <nav class="actions" aria-label="Ações">
+      <button id="reload">
+        <span class="icon">↻</span>
+        Reiniciar
+      </button>
+
+      <button class="primary" id="arButton">
+        <span class="icon">◈</span>
+        Ver em RA
+      </button>
+
+      <button id="infoButton">
+        <span class="icon">ⓘ</span>
+        Informações
+      </button>
+    </nav>
+  </main>
+
+  <!-- Modelo humano provisório para testar RA no Android. -->
+  <model-viewer
+    id="arModel"
+    src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/CesiumMan/glTF-Binary/CesiumMan.glb"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    camera-controls>
+  </model-viewer>
+
+  <dialog id="infoDialog">
+    <section class="sheet">
+      <h2>Homo sapiens</h2>
+      <p class="sub">A única espécie humana que vive atualmente.</p>
+
+      <div class="facts">
+        <div class="fact"><strong>Período</strong>Quaternário</div>
+        <div class="fact"><strong>Origem</strong>Cerca de 300 mil anos atrás</div>
+        <div class="fact"><strong>Dieta</strong>Onívoro</div>
+        <div class="fact"><strong>Grupo</strong>Primatas — Hominídeos</div>
+        <div class="fact"><strong>Distribuição</strong>Todos os continentes</div>
+        <div class="fact"><strong>Situação</strong>Espécie atual</div>
+      </div>
+
+      <p class="note">
+        O Homo sapiens surgiu na África e se espalhou pelo planeta. Linguagem,
+        cooperação, cultura e tecnologia tiveram papel importante em sua história.
+        O modo RA utiliza temporariamente um modelo humano genérico.
+      </p>
+
+      <button class="close" id="closeInfo">Fechar</button>
+    </section>
+  </dialog>
+
+  <script>
+    const frame = document.querySelector('#dinoFrame');
+    const loading = document.querySelector('#loading');
+    const dialog = document.querySelector('#infoDialog');
+    const arModel = document.querySelector('#arModel');
+
+    frame.addEventListener('load', () => {
+      setTimeout(() => loading.classList.add('hidden'), 1800);
+    });
+
+    setTimeout(() => loading.classList.add('hidden'), 8000);
+
+    document.querySelector('#reload').addEventListener('click', () => {
+      loading.classList.remove('hidden');
+      const current = frame.src;
+      frame.src = '';
+      setTimeout(() => frame.src = current, 120);
+    });
+
+    document.querySelector('#arButton').addEventListener('click', async () => {
+      try {
+        await arModel.activateAR();
+      } catch (erro) {
+        alert('A realidade aumentada não está disponível neste navegador.');
+      }
+    });
+
+    document.querySelector('#infoButton').addEventListener('click', () => dialog.showModal());
+    document.querySelector('#closeInfo').addEventListener('click', () => dialog.close());
+  </script>
+</body>
+</html>
 
