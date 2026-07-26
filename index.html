@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#08130f" />
+  <meta name="description" content="DINOSSIER — Uma viagem pelas eras da Terra." />
+  <title>DINOSSIER — Eras da Terra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loading" class="loading" aria-live="polite">
+    <div class="loading__content">
+      <div class="dna" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <p class="loading__eyebrow">ARQUIVO PALEONTOLÓGICO</p>
+      <h1>DINOSSIER</h1>
+      <p id="loadingText">Reconstruindo a linha do tempo...</p>
+      <div class="progress"><div id="progressBar"></div></div>
+      <span id="progressValue">0%</span>
+    </div>
+  </div>
+
+  <header class="hero" id="inicio">
+    <nav class="nav">
+      <a class="brand" href="#inicio" aria-label="DINOSSIER, início">
+        <span class="brand__mark">D</span>
+        <span>DINOSSIER</span>
+      </a>
+      <button class="nav__button" id="soundButton" type="button" aria-pressed="false">🔈 Ambiente</button>
+    </nav>
+
+    <div class="hero__mist"></div>
+    <div class="hero__content">
+      <p class="eyebrow">FESC • EXPOSIÇÃO INTERATIVA</p>
+      <h1>Uma viagem pelas<br><span>eras da Terra</span></h1>
+      <p class="hero__lead">Explore ambientes, criaturas e grandes transformações da vida, do Paleozoico ao Cenozoico.</p>
+      <div class="hero__actions">
+        <a class="button button--primary" href="#linha-do-tempo">Explorar linha do tempo</a>
+        <button class="button button--ghost" id="randomButton" type="button">Descoberta aleatória</button>
+      </div>
+    </div>
+
+    <div class="hero__facts" aria-label="Resumo da exposição">
+      <div><strong>3</strong><span>grandes eras</span></div>
+      <div><strong>8</strong><span>períodos em destaque</span></div>
+      <div><strong>12+</strong><span>formas de vida</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro section">
+      <p class="eyebrow">COMO FUNCIONA</p>
+      <h2>Cada QR Code abre um capítulo da história da vida</h2>
+      <p>O foco não é mostrar apenas dinossauros. A exposição apresenta diferentes eras e seus habitantes: trilobitas, répteis marinhos, dinossauros, mamutes e outros animais pré-históricos.</p>
+    </section>
+
+    <section class="timeline section" id="linha-do-tempo">
+      <div class="section__heading">
+        <div>
+          <p class="eyebrow">LINHA DO TEMPO</p>
+          <h2>Escolha uma era</h2>
+        </div>
+        <p>Toque em uma era para conhecer seus períodos e os animais que marcaram aquele capítulo.</p>
+      </div>
+      <div class="era-grid" id="eraGrid"></div>
+    </section>
+
+    <section class="featured section" id="dossie">
+      <div class="featured__visual" id="featuredVisual">
+        <div class="featured__number" id="featuredNumber">001</div>
+        <div class="creature" id="creatureEmoji" aria-hidden="true">🦖</div>
+        <div class="scanline"></div>
+      </div>
+      <article class="featured__content">
+        <p class="eyebrow" id="featuredEra">ERA MESOZOICA</p>
+        <p class="period" id="featuredPeriod">PERÍODO CRETÁCEO</p>
+        <h2 id="featuredName">Tiranossauro rex</h2>
+        <p class="scientific" id="featuredScientific"><em>Tyrannosaurus rex</em></p>
+        <p id="featuredDescription">Um dos maiores predadores terrestres conhecidos, viveu no fim do Cretáceo.</p>
+        <div class="stat-grid" id="statGrid"></div>
+        <div class="featured__actions">
+          <a class="button button--primary" id="modelButton" href="#" target="_blank" rel="noopener">Explorar em 3D ↗</a>
+          <button class="button button--ghost" id="factsButton" type="button">Ver curiosidades</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="periods section">
+      <div class="section__heading">
+        <div>
+          <p class="eyebrow">CAPÍTULOS</p>
+          <h2>Períodos em destaque</h2>
+        </div>
+      </div>
+      <div class="period-grid" id="periodGrid"></div>
+    </section>
+  </main>
+
+  <dialog id="factsDialog" class="dialog">
+    <button class="dialog__close" id="closeDialog" type="button" aria-label="Fechar">×</button>
+    <p class="eyebrow">CURIOSIDADES</p>
+    <h2 id="dialogTitle">Tiranossauro rex</h2>
+    <ul id="dialogFacts"></ul>
+  </dialog>
+
+  <footer>
+    <div class="brand"><span class="brand__mark">D</span><span>DINOSSIER</span></div>
+    <p>Uma viagem pelas eras da Terra • Projeto para a FESC</p>
+  </footer>
+
+  <audio id="forestAudio" loop preload="none">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2c7aa47c1f.mp3?filename=forest-with-small-river-birds-and-nature-field-recording-6735.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
