@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f3e4c7">
+  <meta name="theme-color" content="#f1dfc2">
   <title>DINOSSIER — Homo sapiens</title>
 
   <script type="module"
@@ -14,15 +14,15 @@
     :root{
       --terra:#5a3421;
       --ocre:#b87534;
-      --areia:#f3e4c7;
-      --vidro:rgba(255,248,232,.92);
+      --creme:#fbf4e8;
+      --vidro:rgba(255,248,235,.91);
       --texto:#2a1d15;
-      --sombra:0 18px 55px rgba(65,38,20,.27);
+      --sombra:0 18px 55px rgba(65,38,20,.24);
     }
 
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--texto)}
-    body{min-height:100svh;background:#dfb878;overflow:hidden}
+    body{min-height:100svh;background:#dec08d;overflow:hidden}
 
     .app{
       position:relative;
@@ -33,8 +33,8 @@
       flex-direction:column;
       overflow:hidden;
       background:
-        radial-gradient(circle at 50% 22%,rgba(255,250,230,.92),transparent 37%),
-        linear-gradient(180deg,#f5e8cf 0%,#e1b879 55%,#8b5432 100%);
+        radial-gradient(circle at 50% 25%,rgba(255,249,235,.88),transparent 38%),
+        linear-gradient(180deg,#f6e9d3 0%,#dfbd82 54%,#9a623b 100%);
       isolation:isolate;
     }
 
@@ -43,12 +43,12 @@
       position:absolute;
       inset:0;
       z-index:-1;
-      opacity:.40;
+      opacity:.38;
       background:
-        radial-gradient(ellipse at 8% 91%,#57351f 0 13%,transparent 14%),
-        radial-gradient(ellipse at 92% 85%,#764529 0 16%,transparent 17%),
-        radial-gradient(ellipse at 53% 97%,#a96c38 0 19%,transparent 20%);
-      filter:blur(25px);
+        radial-gradient(ellipse at 10% 90%,#6c4127 0 13%,transparent 14%),
+        radial-gradient(ellipse at 91% 84%,#805032 0 15%,transparent 16%),
+        radial-gradient(ellipse at 55% 96%,#b67b48 0 18%,transparent 19%);
+      filter:blur(24px);
     }
 
     header{
@@ -78,7 +78,7 @@
     .scientific{
       margin:9px 0 0;
       font-style:italic;
-      color:#684a34;
+      color:#6a4a35;
       font-size:1rem;
     }
 
@@ -88,14 +88,13 @@
       overflow:hidden;
     }
 
-    .sketchfab-frame{
+    #homoModel{
       position:absolute;
-      left:-31%;
-      top:-16%;
-      width:162%;
-      height:132%;
-      border:0;
+      inset:0;
+      width:100%;
+      height:100%;
       background:transparent;
+      --poster-color:transparent;
     }
 
     .top-fade,.bottom-fade{
@@ -107,12 +106,12 @@
 
     .top-fade{
       top:0;height:23%;
-      background:linear-gradient(180deg,#f3e4c7 8%,rgba(243,228,199,.78) 42%,transparent);
+      background:linear-gradient(180deg,#f5e8d2 8%,rgba(245,232,210,.78) 42%,transparent);
     }
 
     .bottom-fade{
       bottom:0;height:28%;
-      background:linear-gradient(0deg,#9a623d 3%,rgba(177,116,67,.72) 43%,transparent);
+      background:linear-gradient(0deg,#9b623d 3%,rgba(176,116,68,.7) 43%,transparent);
     }
 
     .loading{
@@ -125,7 +124,10 @@
       transition:opacity .6s ease;
     }
 
-    .loading.hidden{opacity:0}
+    .loading.hidden{
+      opacity:0;
+      visibility:hidden;
+    }
 
     .loading-card{
       padding:15px 20px;
@@ -202,28 +204,35 @@
       border-radius:26px;
       padding:0;
       color:var(--texto);
-      background:#fff7e7;
+      background:var(--creme);
       box-shadow:0 28px 80px rgba(0,0,0,.35);
     }
 
-    dialog::backdrop{background:rgba(33,18,10,.62);backdrop-filter:blur(5px)}
+    dialog::backdrop{
+      background:rgba(33,18,10,.6);
+      backdrop-filter:blur(5px);
+    }
 
     .sheet{padding:24px}
     .sheet h2{margin:0 0 5px;color:var(--terra);font-size:1.6rem}
     .sheet .sub{margin:0 0 20px;color:#795d48;font-style:italic}
 
     .facts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .fact{padding:14px;border-radius:16px;background:#f0e2c8}
+    .fact{padding:14px;border-radius:16px;background:#efe1ca}
     .fact strong{
-      display:block;margin-bottom:4px;color:var(--terra);
-      font-size:.73rem;text-transform:uppercase;letter-spacing:.06em
+      display:block;
+      margin-bottom:4px;
+      color:var(--terra);
+      font-size:.73rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
     }
 
     .note{
       margin:15px 0 0;
       padding:12px;
       border-radius:14px;
-      background:#ead2ad;
+      background:#ead1ac;
       color:#513620;
       font-size:.86rem;
       line-height:1.4;
@@ -231,11 +240,8 @@
 
     .close{width:100%;margin-top:18px;color:white;background:var(--terra)}
 
-    #arModel{
-      position:fixed;
-      width:1px;height:1px;
-      opacity:0;
-      pointer-events:none;
+    @media(max-width:420px){
+      .facts{grid-template-columns:1fr}
     }
 
     @media(min-width:700px){
@@ -253,14 +259,27 @@
     </header>
 
     <section class="stage">
-      <iframe
-        id="dinoFrame"
-        class="sketchfab-frame"
-        title="Homo sapiens pré-histórico 3D"
-        allow="autoplay; fullscreen; xr-spatial-tracking"
-        allowfullscreen
-        src="https://sketchfab.com/models/409301c8f6864042866c54de20e5c860/embed?autostart=1&preload=1&animation_autoplay=1&ui_hint=0&ui_infos=0&ui_controls=0&ui_stop=0&ui_help=0&ui_settings=0&ui_inspector=0&ui_watermark=0&ui_watermark_link=0&camera=0">
-      </iframe>
+      <model-viewer
+        id="homoModel"
+        src="1000617882_default.glb"
+        alt="Homo sapiens pré-histórico animado"
+        camera-controls
+        touch-action="pan-y"
+        autoplay
+        loop
+        animation-name="*"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        shadow-intensity="1.15"
+        shadow-softness=".8"
+        exposure="1"
+        environment-image="neutral"
+        interaction-prompt="none"
+        camera-orbit="0deg 82deg 3.2m"
+        min-camera-orbit="auto 55deg 1.8m"
+        max-camera-orbit="auto 105deg 6m"
+        field-of-view="28deg">
+      </model-viewer>
 
       <div class="top-fade"></div>
       <div class="bottom-fade"></div>
@@ -276,39 +295,30 @@
     <div class="status">Modelo animado • arraste para explorar</div>
 
     <nav class="actions" aria-label="Ações">
-      <button id="reload">
+      <button id="reload" type="button">
         <span class="icon">↻</span>
         Reiniciar
       </button>
 
-      <button class="primary" id="arButton">
+      <button class="primary" id="arButton" type="button">
         <span class="icon">◈</span>
         Ver em RA
       </button>
 
-      <button id="infoButton">
+      <button id="infoButton" type="button">
         <span class="icon">ⓘ</span>
         Informações
       </button>
     </nav>
   </main>
 
-  <!-- Modelo humano provisório para testar RA no Android. -->
-  <model-viewer
-    id="arModel"
-    src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/CesiumMan/glTF-Binary/CesiumMan.glb"
-    ar
-    ar-modes="webxr scene-viewer quick-look"
-    camera-controls>
-  </model-viewer>
-
   <dialog id="infoDialog">
     <section class="sheet">
       <h2>Homo sapiens</h2>
-      <p class="sub">A única espécie humana que vive atualmente.</p>
+      <p class="sub">A espécie humana atual e sua longa trajetória evolutiva.</p>
 
       <div class="facts">
-        <div class="fact"><strong>Período</strong>Quaternário</div>
+        <div class="fact"><strong>Período</strong>Quaternário — Holoceno</div>
         <div class="fact"><strong>Origem</strong>Cerca de 300 mil anos atrás</div>
         <div class="fact"><strong>Dieta</strong>Onívoro</div>
         <div class="fact"><strong>Grupo</strong>Primatas — Hominídeos</div>
@@ -318,44 +328,70 @@
 
       <p class="note">
         O Homo sapiens surgiu na África e se espalhou pelo planeta. Linguagem,
-        cooperação, cultura e tecnologia tiveram papel importante em sua história.
-        O modo RA utiliza temporariamente um modelo humano genérico.
+        cooperação, cultura e tecnologia foram fundamentais para sua adaptação
+        a diferentes ambientes.
       </p>
 
-      <button class="close" id="closeInfo">Fechar</button>
+      <button class="close" id="closeInfo" type="button">Fechar</button>
     </section>
   </dialog>
 
   <script>
-    const frame = document.querySelector('#dinoFrame');
+    const model = document.querySelector('#homoModel');
     const loading = document.querySelector('#loading');
     const dialog = document.querySelector('#infoDialog');
-    const arModel = document.querySelector('#arModel');
 
-    frame.addEventListener('load', () => {
-      setTimeout(() => loading.classList.add('hidden'), 1800);
+    const esconderCarregamento = () => loading.classList.add('hidden');
+
+    model.addEventListener('load', () => {
+      try{
+        model.play({ repetitions: Infinity });
+      }catch(erro){}
+      setTimeout(esconderCarregamento, 900);
     });
 
-    setTimeout(() => loading.classList.add('hidden'), 8000);
+    model.addEventListener('error', () => {
+      esconderCarregamento();
+      alert('Não foi possível carregar o arquivo 1000617882_default.glb.');
+    });
+
+    setTimeout(esconderCarregamento, 10000);
 
     document.querySelector('#reload').addEventListener('click', () => {
       loading.classList.remove('hidden');
-      const current = frame.src;
-      frame.src = '';
-      setTimeout(() => frame.src = current, 120);
+      model.currentTime = 0;
+      model.pause();
+
+      setTimeout(() => {
+        try{
+          model.play({ repetitions: Infinity });
+        }catch(erro){}
+        model.cameraOrbit = '0deg 82deg 3.2m';
+        esconderCarregamento();
+      }, 250);
     });
 
     document.querySelector('#arButton').addEventListener('click', async () => {
-      try {
-        await arModel.activateAR();
-      } catch (erro) {
+      try{
+        await model.activateAR();
+      }catch(erro){
         alert('A realidade aumentada não está disponível neste navegador.');
       }
     });
 
-    document.querySelector('#infoButton').addEventListener('click', () => dialog.showModal());
-    document.querySelector('#closeInfo').addEventListener('click', () => dialog.close());
+    document.querySelector('#infoButton').addEventListener('click', () => {
+      dialog.showModal();
+    });
+
+    document.querySelector('#closeInfo').addEventListener('click', () => {
+      dialog.close();
+    });
+
+    dialog.addEventListener('click', evento => {
+      if(evento.target === dialog){
+        dialog.close();
+      }
+    });
   </script>
 </body>
 </html>
-
