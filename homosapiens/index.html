@@ -259,32 +259,34 @@
     </header>
 
     <section class="stage">
+
       <model-viewer
-        id="homoModel"
-        src="Walking_novo_1.glb"
-        alt="Homo sapiens pré-histórico animado"
-        camera-controls
-        touch-action="pan-y"
-        autoplay
-        loop
-        animation-name="*"
-        ar
-        ar-modes="webxr scene-viewer quick-look"
-        shadow-intensity="1.15"
-        shadow-softness=".8"
-        exposure="1"
-        environment-image="neutral"
-        interaction-prompt="none"
-        
+  id="homoModel"
+  src="Walking_novo_1.glb"
+  alt="Homo sapiens pré-histórico animado"
 
+  camera-controls
+  touch-action="pan-y"
 
+  autoplay
+  loop
+  animation-name="*"
 
-shadow-intensity="0"
+  ar
+  ar-modes="webxr scene-viewer quick-look"
+
+  shadow-intensity="0"
+  shadow-softness="0.8"
+  exposure="1"
+  environment-image="neutral"
+  interaction-prompt="none"
+
   camera-orbit="0deg 82deg auto"
-  camera-target="0m -2m 0m"
+  camera-target="0m 2m 0m"
+  min-camera-orbit="auto 55deg auto"
+  max-camera-orbit="auto 105deg auto"
   field-of-view="35deg">
-      
-      </model-viewer>
+</model-viewer>
 
       <div class="top-fade"></div>
       <div class="bottom-fade"></div>
